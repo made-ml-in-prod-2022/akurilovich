@@ -14,6 +14,6 @@ setup(
             "cli = ml_project.main:main"
         ]
     },
-    install_requires = required,
+    install_requires=required,
     license="MIT",
 )

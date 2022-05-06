@@ -8,7 +8,7 @@
 
 ### Установка
 ~~~
-conda create <envname>
+conda create --name <envname> --file requirements.txt
 conda activate <envname>
 setup.py install
 ~~~
