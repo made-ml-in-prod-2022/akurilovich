@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
-from homework1.ml_project.features import (
-extract_target,
-DatasetTransformer
+from ml_project.features import (
+    extract_target,
+    DatasetTransformer,
 )
 
 

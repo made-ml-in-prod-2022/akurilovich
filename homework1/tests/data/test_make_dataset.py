@@ -1,6 +1,6 @@
-from homework1.ml_project.data import (
-load_dataset,
-split_data_train_val
+from ml_project.data import (
+    load_dataset,
+    split_data_train_val
 )
 from homework1.ml_project.enities import SplittingParams
 
