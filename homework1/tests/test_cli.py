@@ -4,7 +4,7 @@ import sys
 import numpy as np
 
 from unittest.mock import patch
-from ml_project.main import main
+from homework1.ml_project.main import main
 
 CONFIG_PATH = "train_config_lr.yaml"
 

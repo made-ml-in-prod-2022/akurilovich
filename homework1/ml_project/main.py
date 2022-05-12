@@ -1,12 +1,11 @@
 import click
 import logging
 import sys
-import os
 from typing import NoReturn
 
 from ml_project.enities import TrainingPipelineParams, read_training_pipeline_params
 from ml_project.data import split_data_train_val, load_dataset
-from ml_project.features import DatasetTransformer, extract_target
+from ml_project.features import extract_target
 from ml_project.models import (
     build_model_pipeline,
     calculate_metrics,
