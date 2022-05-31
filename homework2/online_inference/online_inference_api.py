@@ -6,13 +6,17 @@ from typing import List, Union, Optional
 
 import pandas as pd
 
+import gdown
+
+from requests.exceptions import MissingSchema
+
 from sklearn.pipeline import Pipeline
 
 from fastapi import FastAPI, Response, status
 from pydantic import BaseModel, conlist
 import uvicorn
 
-PATH_TO_DEFAULT_MODEL = r"../models/model_lr.pkl"
+PATH_TO_DEFAULT_MODEL = r"./models/model_lr.pkl"
 DEFAULT_APP_IP = "127.0.0.1"
 
 
@@ -30,6 +34,12 @@ def load_model(load_path: str) -> Pipeline:
 
     with open(load_path, "rb") as input_stream:
         return pickle.load(input_stream)
+
+
+def load_model_gdrive(load_path: str) -> Pipeline:
+
+    model_path = gdown.download(load_path, "models//model.pkl")
+    return load_model(model_path)
 
 
 logger = logging.getLogger(__name__)
@@ -78,17 +88,29 @@ def make_prediction(submission: HeartDataSubmission):
 
 
 @app.on_event("startup")
-def start_app(model_path=PATH_TO_DEFAULT_MODEL):
+def start_app():
 
     global model
 
-    model_path = os.getenv("MODEL_PATH", model_path)
-    model = load_model(model_path)
+    try:
+        logger.info(f"Loading model from Google Drive: {os.getenv('MODEL_URL', '')}")
+        model = load_model_gdrive(os.getenv("MODEL_URL", ""))
+        logger.info(f"Model from Google Drive is loaded")
+    except Exception as err:
+        logger.info(f"Model cannot be loaded from Google Drive: {err}. Loading the default model.")
+        model = load_model(PATH_TO_DEFAULT_MODEL)
+        logger.info(f"Default model is loaded")
 
 
 if __name__ == "__main__":
+
+    if isinstance(os.getenv("APP_IP", None), str):
+        app_ip = os.getenv("APP_IP", None)
+    else:
+        app_ip = DEFAULT_APP_IP
+
     uvicorn.run(
         "online_inference_api:app",
-        host=DEFAULT_APP_IP,
+        host=app_ip,
         port=os.getenv("PORT", default=8000),
     )
