@@ -31,14 +31,14 @@ with DAG(
 
     data_sensor = FileSensor(
         task_id="data_sensor",
-        filepath=os.path.join(DIR_GENERATED_DATA, DATA_FILENAME),
+        filepath=os.path.join("/opt/airflow" + DIR_GENERATED_DATA, DATA_FILENAME),
         poke_interval=5,
         retries=200,
     )
 
     target_sensor = FileSensor(
         task_id="target_sensor",
-        filepath=os.path.join(DIR_GENERATED_DATA, TARGET_FILENAME),
+        filepath=os.path.join("/opt/airflow" + DIR_GENERATED_DATA, TARGET_FILENAME),
         poke_interval=5,
         retries=200,
     )

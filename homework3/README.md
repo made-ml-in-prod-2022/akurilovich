@@ -1,12 +1,22 @@
-# airflow-examples
-код для пары Data Pipelines
+# Kurilovich AA
 
-чтобы развернуть airflow, предварительно собрав контейнеры
+Решение HW03 по курсу "ML в продакшене".
+
+Airflow: Data Pipelines
+
+
+Развернуть airflow, предварительно собрав контейнеры
+
 ~~~
-# для корректной работы с переменными, созданными из UI
-export FERNET_KEY=$(python -c "from cryptography.fernet import Fernet; FERNET_KEY = Fernet.generate_key().decode(); print(FERNET_KEY)")
 sudo docker compose up --build
 ~~~
-Ссылка на документацию по docker compose up
+Использование:
+1. Запустить DAG generate_data_pipeline
+2. Запустить DAG model_train_val_pipeline
+3. В Admin -> Variables указать директорию с актуальной моделью в Variable DIR_MODEL
+4. Запустить DAG inference_pipeline
 
-https://docs.docker.com/compose/reference/up/
+Монтируется следующая дирректория в docker контейнеры. Поменять в dags/... перед разворачиванием airflow
+~~~
+DIR_DATA_HOST_MACHINE = "/home/lemm1ng/Programing/Made_VK/ML_in_Prod/homework3/data/"
+~~~
