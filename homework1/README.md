@@ -20,7 +20,7 @@ python ml_project/main.py train_pipeline <path_to_config>
 Примеры конфигов в .yaml формате находятся в папке configs
 ### Предсказание
 ~~~
-python ml_project/main.py predict <path_to_saved_model> <path_to_data> <path_to_save_predictions>
+python ml_project/main.py <path_to_saved_model> <path_to_data> <path_to_save_predictions>
 ~~~
 ### Тестирование
 ~~~

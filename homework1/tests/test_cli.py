@@ -20,7 +20,7 @@ def test_train_pipeline(tmpdir, synthetic_dataset, config):
     with open(tmpdir.join(CONFIG_PATH), "w") as output_stream:
         output_stream.write(config)
 
-    command = ["main.py", "train_pipeline", str(tmpdir.join(CONFIG_PATH))]
+    command = ["main.py", "train_pipeline", tmpdir.join(CONFIG_PATH)]
 
     with patch.object(sys, "argv", command):
         with pytest.raises(SystemExit) as err:
@@ -37,13 +37,13 @@ def test_predict(tmpdir, synthetic_dataset, config):
     with open(tmpdir.join(CONFIG_PATH), "w") as output_stream:
         output_stream.write(config)
 
-    command = ["main.py", "train_pipeline", str(tmpdir.join(CONFIG_PATH))]
+    command = ["main.py", "train_pipeline", tmpdir.join(CONFIG_PATH)]
 
     with patch.object(sys, "argv", command):
         with pytest.raises(SystemExit) as err:
             main()
 
-    command = ["main.py", "predict", str(tmpdir.join(MODEL_PATH)), str(tmpdir.join(DATA_PATH)), str(tmpdir.join(PREDICT_PATH))]
+    command = ["main.py", "predict", tmpdir.join(MODEL_PATH), tmpdir.join(DATA_PATH), tmpdir.join(PREDICT_PATH)]
 
     with patch.object(sys, "argv", command):
         with pytest.raises(SystemExit) as err:
