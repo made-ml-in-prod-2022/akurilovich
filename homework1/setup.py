@@ -6,7 +6,7 @@ with open('requirements.txt') as f:
 setup(
     name="ml_project",
     packages=find_packages(),
-    version="0.1.0",
+    version="0.1.1",
     description="HW01 for MADE VK ML in Production Course",
     author="AAKurilovich",
     entry_points={
