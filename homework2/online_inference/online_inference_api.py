@@ -8,8 +8,6 @@ import pandas as pd
 
 import gdown
 
-from requests.exceptions import MissingSchema
-
 from sklearn.pipeline import Pipeline
 
 from fastapi import FastAPI, Response, status
