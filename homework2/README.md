@@ -20,7 +20,7 @@ pip install -e homework1/
 pip install -r ./homework2/requirements.txt
 ~~~
 
-### Запуск API для online inference
+###  Запуск API для online inference
 
 Запуск из ./homework2/
 
